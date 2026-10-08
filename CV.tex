@@ -1,0 +1,304 @@
+%% start of file `template.tex'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+\documentclass[11pt,a4paper,sans]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+
+\moderncvcolor{blue}                               % color options 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' and 'red'
+% moderncv themes
+\moderncvstyle{classic}                             % style options are 'casual' (default), 'classic', 'banking', 'oldstyle' and 'fancy'
+%\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
+%\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+
+% adjust the page margins
+\usepackage[scale=0.75]{geometry}
+%\setlength{\footskip}{106.00005pt}                 % depending on the amount of information in the footer, you need to change this value. comment this line out and set it to the size given in the warning
+%\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
+%\setlength{\makecvheadnamewidth}{10cm}            % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+
+% font loading
+% for luatex and xetex, do not use inputenc and fontenc
+% see https://tex.stackexchange.com/a/496643
+\ifxetexorluatex
+  \usepackage{fontspec}
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX}
+  \setmainfont{Latin Modern Roman}
+  \setsansfont{Latin Modern Sans}
+  \setmonofont{Latin Modern Mono}
+  \setmathfont{Latin Modern Math} 
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
+
+% document language
+\usepackage[english]{babel}  % FIXME: using spanish breaks moderncv
+
+% personal data
+\name{}{Dhiman Ray}
+%\title{Résumé title}                               % optional, remove / comment the line if not wanted
+%\born{4 July 1776}                                 % optional, remove / comment the line if not wanted
+\address{University of Oregon}{Department of Chemistry and Biochemistry}{151B Klamath Hall, Eugene, OR 97403, USA}% optional, remove / comment the line if not wanted; the "postcode city" and "country" arguments can be omitted or provided empty
+%\phone[mobile]{+1~(234)~567~890}                   % optional, remove / comment the line if not wanted; the optional "type" of the phone can be "mobile" (default), "fixed" or "fax"
+%\phone[fixed]{+2~(345)~678~901}
+%\phone[fax]{+3~(456)~789~012}
+\email{dray [at] uoregon.edu}                               % optional, remove / comment the line if not wanted
+\homepage{https://blogs.uoregon.edu/dhimanraygroup}                         % optional, remove / comment the line if not wanted
+
+% Social icons
+%\social[linkedin]{john.doe}                        % optional, remove / comment the line if not wanted
+%\social[xing]{john\_doe}                           % optional, remove / comment the line if not wanted
+%\social[twitter]{ji\_doe}                             % optional, remove / comment the line if not wanted
+%\social[github]{jdoe}                              % optional, remove / comment the line if not wanted
+%\social[gitlab]{jdoe}                              % optional, remove / comment the line if not wanted
+% \social[stackoverflow]{0000000/johndoe}            % optional, remove / comment the line if not wanted
+% \social[bitbucket]{jdoe}                           % optional, remove / comment the line if not wanted
+% \social[skype]{jdoe}                               % optional, remove / comment the line if not wanted
+% \social[orcid]{0000-0000-000-000}                  % optional, remove / comment the line if not wanted
+% \social[researchgate]{jdoe}                        % optional, remove / comment the line if not wanted
+% \social[researcherid]{jdoe}                        % optional, remove / comment the line if not wanted
+% \social[telegram]{jdoe}                            % optional, remove / comment the line if not wanted
+% \social[whatsapp]{12345678901}                     % optional, remove / comment the line if not wanted
+% \social[signal]{12345678901}                       % optional, remove / comment the line if not wanted
+% \social[matrix]{@johndoe:matrix.org}               % optional, remove / comment the line if not wanted
+%\social[googlescholar]{ILWljWoAAAAJ}            % optional, remove / comment the line if not wanted
+
+
+%\extrainfo{Google Scholar: https://scholar.google.co.in/citations?user=ILWljWoAAAAJ}                 % optional, remove / comment the line if not wanted
+%\photo[64pt][0.4pt]{picture}                       % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
+%\quote{Some quote}                                 % optional, remove / comment the line if not wanted
+
+% bibliography adjustments (only useful if you make citations in your resume, or print a list of publications using BibTeX)
+%   to show numerical labels in the bibliography (default is to show no labels)
+%\makeatletter\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}\makeatother
+%\renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}
+%   to redefine the bibliography heading string ("Publications")
+%\renewcommand{\refname}{Articles}
+\usepackage{csquotes}
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=ydnt,      % Reverse chronological (Year, Date, Name, Title)
+  maxnames=99,       
+  giveninits=true    
+]{biblatex}
+
+\addbibresource{publications.bib}
+
+% --- FORMATTING ADJUSTMENTS ---
+\DeclareFieldFormat[article,incollection]{title}{#1}
+\DeclareFieldFormat[article,incollection]{volume}{#1} % Normal weight (not bold)
+
+\renewbibmacro{in:}{}
+\renewbibmacro*{issue+date}{%
+  \printtext{\mkbibparens{\printfield{year}}}%
+  \newunit}
+
+% % --- BOLD DR. DHIMAN RAY IN AUTHOR LIST ---
+% \DeclareNameFormat{author}{%
+%   \nameparts{#1}%
+%   \ifthenelse{\equal{\namepartfamily}{Ray}\and\parenthesis{\equal{\namepartgiven}{D.}\or\equal{\namepartgiven}{Dhiman}}}%
+%     {\textbf{\ifblank{\namepartgiveni}{}{\namepartgiveni\addspace}\namepartfamily}}%
+%     {\ifblank{\namepartgiveni}{}{\namepartgiveni\addspace}\namepartfamily}%
+%   \ifthenelse{\value{listcount}<\value{liststop}}%
+%     {\addcomma\space}%
+%     {}%
+% }
+
+% --- CONTINUOUS ENUMERATE OVERRIDE ---
+\defbibenvironment{bibliography}
+  {\list
+     {\printtext[labelnumberwidth]{\arabic{enumi}}}
+     {\usecounter{enumi}%
+      \setlength{\leftmargin}{\bibhang}%
+      \setlength{\itemindent}{-\leftmargin}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}}
+  {\endlist}
+  {\item}
+
+% Add this to your preamble to force sequential incrementing
+% \patchcmd{\defbibenvironment{bibliography}}
+%   {\def\pnm{\thefield{labelnumber}}}
+%   {\addtocounter{enumi}{1}\def\pnm{\the\value{enumi}}}
+%   {}{}
+
+% Custom formatting to match the PDF layout:
+% 1. Make Volume numbers bold
+%\declarefieldformat[article,incollection]{volume}{\mkbibbold{#1}}
+
+% 2. Remove quotes around article titles
+%\declarefieldformat[article,incollection]{title}{#1}
+
+% 3. Remove "In:" prefix before journals
+% \renewbibmacro{in:}{}
+
+% % 4. Format Year in parentheses after volume/pages
+% \renewbibmacro*{issue+date}{%
+%   \printtext{\mkbibparens{\printfield{year}}}%
+%   \newunit}
+
+% Section Header Definition
+% \newcommand{\cvsection}[1]{%
+%   \vspace{12pt}%
+%   {\Large \bfseries #1}%
+%   \vspace{2pt}%
+%   \hrule%
+%   \vspace{8pt}%
+% }
+
+% bibliography with mutiple entries
+%\usepackage{multibib}
+%\newcites{book,misc}{{Books},{Others}}
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+%\begin{CJK*}{UTF8}{gbsn}                          % to typeset your resume in Chinese using CJK
+%-----       resume       ---------------------------------------------------------
+\makecvtitle
+
+% \section{Research Interests}
+% Molecular Dynamics Simulation, Enhanced Sampling, Rare Event Sampling, Machine Learning, Computational Biophysics
+\section{Professional Experience}
+\cventry{09/2024--}{Assistant Professor of Chemistry and Biochemistry}{University of Oregon}{}{}{Affiliate position in Physics and Materials Science Institute}
+\cventry{04/2022--09/2024}{Postdoctoral Researcher}{Italian Institute of Technology}{Genoa, Italy}{}{Advisor: Michele Parrinello}
+
+\section{Education}
+\cventry{09/2018--03/2022}{Ph.D. in Chemistry}{University of California Irvine}{USA}{}{Advisor: Ioan Andricioaei}  % arguments 3 to 6 can be left empty
+\cventry{08/2013--06/2018}{Integrated BS-MS in Chemical Sciences}{IISER Kolkata}{India}{}{MS Dissertation Advisor: Ashwani Tiwary}
+
+\section{External Research Grants}
+
+% Syntax:
+% \cventry{Year}{Role / Agency}{Total Amount}{Location/Scope}{}{Description & Award Title}
+
+\cventry{02/2026--12/2030}{National Institutes of Health}{\$2,006,425 (Direct cost: \$1,375,000) }{}{}{%
+  Maximizing Investigators Research Award (MIRA) R35GM162443, Single-PI \\ \textit{Molecular Mechanisms of Antimicrobial Resistance from Machine Learning Augmented Enhanced Sampling}. 
+}
+
+\cventry{09/2026--08/2028}{American Chemical Society Petroleum Research Fund}{\$110,000 (Direct cost)}{}{}{%
+  Doctoral New Investigator (DNI) Award, Single-PI \\ \textit{Machine Learning Augmented Characterization of the Atomistic Mechanism of Coil–to-Globule Phase Transition in Poly(N-isopropylacrylamide)}. 
+}
+
+
+\section{Publications}
+\nocite{*}
+% \printbibliography[
+% type=article,
+% title={},          % Hides the default "References" header
+% heading=none,      % Suppresses biblatex heading block
+% resetnumbers=false
+% ]
+\subsection*{At University of Oregon}
+\printbibliography[
+  keyword={uoregon}, 
+  heading=none,
+  resetnumbers=false 
+]
+
+\subsection*{Prior to University of Oregon}
+\printbibliography[
+  keyword={prior}, 
+  heading=none,
+  resetnumbers=false % Prevents resetting the counter back to 1
+]
+
+% \nocite{*}
+% \bibliographystyle{unsrt}
+% \begingroup
+% \renewcommand{\refname}{Publications} % Removes the automatic "References" heading text
+% \bibliography{publications}
+% \endgroup  
+
+
+\section{Invited Seminars and Conference Presentations}
+\cvitem{09/2026}{Boise State University, Idaho}
+\cvitem{07/2026}{Saha Institute of Nuclear Physics, Kolkata, India}
+\cvitem{01/2026}{Indian Institute of Technology, Jodhpur, India (Webinar)}
+\cvitem{12/2025}{PacificChem 2025, Honolulu, Hawaii}
+\cvitem{12/2025}{California State University, Chico}
+\cvitem{10/2025}{Indian Institute of Technology, Kharagpur, India}
+\cvitem{10/2025}{Western Washington University}
+\cvitem{09/2025}{The Abdus Salam International Center for Theoretical Physics (ICTP), Trieste, Italy}
+\cvitem{08/2025}{ACS Fall 2025 National Meeting, Washington DC}
+\cvitem{06/2025}{University of California, Riverside}
+\cvitem{06/2025}{University of California, Irvine}
+\cvitem{04/2025}{Oregon Health and Science University, Biomedical Engineering Seminar}
+\cvitem{03/2025}{ACS Spring 2025 National Meeting, San Diego}
+\cvitem{03/2025}{Recent Advances in Modeling Rare Events (RARE): Methods and Applications, Khajuraho, India}
+
+% Before the University of Oregon
+
+% \cvitem{02/2024}{Department of Chemistry and Biochemistry, University of Oregon}
+% \cvitem{03/2023}{Bayes Comp 2023, Levi, Finland}
+% \cvitem{03/2022}{Future Faculty Symposium, Arizona State University}
+% \cvitem{03/2021}{Mathematical, Computational and Systems Biology Seminar, University of California Irvine}
+
+\section{Awards and Honours}
+\cvitem{02/2026}{Maximizing Investigators' Research Award, National Institutes of Health, USA}
+\cvitem{09/2026}{American Chemical Society Petroleum Research Fund Doctoral New Investigator Award}
+\cvitem{07/2026}{Physical Chemistry Chemical Physics 2025 Emerging Investigator, Royal Society of Chemistry}
+\cvitem{08/2023}{Best Oral Presentation Award at the European Conference on Theoretical and Computational Chemistry, European Chemical Society}
+\cvitem{05/2021}{Wolfsberg Award in Theoretical Chemistry, University of California Irvine}
+\cvitem{11/2020}{Best Poster Award, ChemSci2020, Royal Society of Chemistry}
+\cvitem{07/2020--12/2020}{NSF MolSSI Software Seed (COVID-19) Fellowship}
+\cvitem{2020}{Graduate Student Travel Grant, University of California (awarded in 2022)}
+\cvitem{02/2020}{Graduate Research Achievement Award (best poster), Biophysical Society Meeting}
+\cvitem{06/2018}{Director's Gold Medal for best academic performance in MS at IISER Kolkata, India}
+\cvitem{06/2018}{Best Master's Thesis Award in Chemistry, IISER Kolkata, India}
+
+\section{Teaching}
+\cvitem{CH 610}{Machine Learning for Chemistry; Winter 2025, Spring 2026}
+\cvitem{CH 412/512}{Physical Chemistry II: Statistical Mechanics and Kinetics: Winter 2026}
+\cvitem{CH 607}{Physical Chemistry Seminar Series (Fall 2025--)}
+
+\section{Mentorship}
+
+\subsection{Postdoctoral Researchers}
+\cvitem{2024--}{Dr. Sompriya Chatterjee}
+\cvitem{2026--}{Dr. Diptesh Gayen}
+\cvitem{2026--}{Dr. Thanh Lai}
+
+\subsection{Graduate Students}
+\cvitem{2024--}{Revanth Elangovan}
+\cvitem{2024}{Jack Hanni (Current: Ph.D. in Physics, Brigham Young University, Utah)}
+
+\subsection{Undergraduate Students}
+\cvitem{2025--}{Emily Stetson (Hui Undergraduate Research Scholar)}
+
+\newpage
+\section{Service}
+\subsection{Doctoral Advisory Committee}
+\cvitem{1}{Evan Wylie (Chair)}
+\cvitem{2}{TT Ith (Chair)}
+\cvitem{3}{Joseph Meilin (Chair)}
+\cvitem{4}{Revanth Elangovan (Advisor)}
+\cvitem{5}{Ben Burress-Irving (External Member)}
+\subsection{Other Services at University of Oregon}
+\cvitem{09/2025--}{Member of the graduate admissions committee, Department of Chemistry and Biochemistry}
+\cvitem{09/2025--}{Organizer of Physical Chemistry Seminar Series}
+\cvitem{04/2026}{Organizer of the Harden and Sofia McConnel Lecture }
+
+\subsection{Outside University of Oregon}
+\cvitem{08/2025}{Presider, ACS Fall 2025 National Meeting, Washington DC}
+\cvitem{08/2025}{Poster Judge, ACS Fall 2025 National Meeting, Washington DC}
+\cvitem{03/2025}{Presider, ACS Spring 2025 National Meeting, San Diego}
+\cvitem{03/2025}{Poster Judge, ACS Spring 2025 National Meeting, San Diego}
+\cvitem{01/2024--}{Member, Early Career Editorial Board, Journal of Chemical Information and Modeling}
+\cvitem{08/2021--}{Member, Trainee Advisory Committee, Living Journal of Computational Molecular Science}
+
+\subsection{Peer Review of Research Papers in Scientific Journals}
+\cvitem{}{Nature Communications, Nature Computational Science, Journal of the American Chemical Society, Protein Science, PRX Life (APS), Journal of Chemical Information and Modeling (ACS), New Journal of Chemistry (RSC), Physical Chemistry Chemical Physics (RSC), eLife, ACS Omega (ACS), Journal of Chemical Theory and Computation (ACS), Biochemical Pharmacology, The Journal of Chemical Physics, Biochemistry, PLOS ONE, Digital Discovery, Bioinformatics and Biology Insights, Biophysical Chemistry, Molecular Simulations, BMC Methods, Journal of Physical Chemistry B, Journal of Physical Chemistry Letters.
+}
+
+\end{document}
+
+
+%% end of file `template.tex'.
+
