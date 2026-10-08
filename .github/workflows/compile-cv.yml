@@ -1,0 +1,34 @@
+name: Compile LaTeX CV
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX Document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: CV.tex # Change 'main.tex' if your main file has a different name
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CV-PDF
+          path: CV.pdf    # Change 'main.pdf' if your output name differs
+
+      - name: Release Latest PDF
+        uses: softprops/action-gh-release@v1
+        with:
+          files: CV.pdf   # Change 'main.pdf' if needed
+          tag_name: latest
+          name: Latest CV Build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
